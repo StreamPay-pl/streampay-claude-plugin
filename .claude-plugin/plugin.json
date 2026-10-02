@@ -1,7 +1,7 @@
 {
   "name": "streampay",
   "displayName": "StreamPay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sprawdzaj wpłaty i bezpiecznie zarządzaj widgetami oraz ustawieniami strony wpłat StreamPay.",
   "author": {
     "name": "StreamPay",

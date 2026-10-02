@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "streampay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sprawdzaj wpłaty i bezpiecznie zarządzaj widgetami oraz ustawieniami strony wpłat StreamPay.",
   "author": {
     "name": "StreamPay",
@@ -89,6 +89,7 @@
             }
           ]
         },
+        "demo_recording_url": "https://www.youtube.com/watch?v=W0IE-iur3fA",
         "commerce": false,
         "commerce_description": "StreamPay tools can read donation records and update creator settings, but they do not initiate payments, purchases or transfers."
       },

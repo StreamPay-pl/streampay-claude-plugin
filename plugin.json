@@ -1,0 +1,100 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "streampay",
+  "version": "1.0.0",
+  "description": "Sprawdzaj wpłaty i bezpiecznie zarządzaj widgetami oraz ustawieniami strony wpłat StreamPay.",
+  "author": {
+    "name": "StreamPay",
+    "email": "kontakt@streampay.pl",
+    "url": "https://streampay.pl"
+  },
+  "homepage": "https://streampay.pl/mcp",
+  "repository": "https://github.com/StreamPay-pl/streampay-claude-plugin",
+  "license": "MIT",
+  "keywords": ["streaming", "wpłaty", "donations", "widgety", "narzędzia-dla-twórców"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "StreamPay",
+        "shortDescription": "Zarządzaj wpłatami i widgetami",
+        "longDescription": "Połącz konto twórcy StreamPay, aby sprawdzać ostatnie wpłaty, podsumowania i ranking wpłacających. Możesz też odczytywać oraz zmieniać obsługiwane ustawienia widgetów i strony wpłat. StreamPay udostępnia tylko dane i operacje objęte zaakceptowanymi uprawnieniami OAuth. Integracja nie może inicjować płatności, usuwać widgetów, zmieniać prywatnych adresów OBS, przesyłać plików ani edytować własnego kodu.",
+        "developerName": "StreamPay",
+        "category": "Productivity",
+        "capabilities": [
+          "Sprawdzanie wpłat i statystyk",
+          "Odczytywanie ustawień widgetów StreamPay",
+          "Zmiana obsługiwanych ustawień widgetów i strony wpłat"
+        ],
+        "websiteURL": "https://streampay.pl/mcp",
+        "supportURL": "https://streampay.pl/kontakt",
+        "privacyPolicyURL": "https://streampay.pl/polityka-prywatnosci",
+        "termsOfServiceURL": "https://streampay.pl/regulamin-platnosci",
+        "defaultPrompt": [
+          "Pokaż moje ostatnie wpłaty StreamPay i podsumuj dzisiejszą kwotę.",
+          "Wyświetl moje widgety StreamPay i wyjaśnij ich obecne ustawienia.",
+          "Pokaż obecną wartość celu, a następnie ustaw cel zbiórki na 5 000 PLN."
+        ],
+        "brandColor": "#6D28D9",
+        "brandColorDark": "#A78BFA",
+        "composerIcon": "./assets/composer-icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "onboardingSkill": "./skills/managing-streampay/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Review recent donations",
+              "prompt": "Show my five latest donations and summarize their total.",
+              "tools_triggered": "get-recent-donations-tool",
+              "expected_behavior": "Return up to five paid donations from the connected review account and calculate the total from those results."
+            },
+            {
+              "description": "Read aggregate donation statistics",
+              "prompt": "How many paid donations have I received, and what is their total and average value?",
+              "tools_triggered": "get-donation-stats-tool",
+              "expected_behavior": "Return the donation count, total, average and other available aggregate values for the connected review account."
+            },
+            {
+              "description": "Inspect available widgets",
+              "prompt": "List my widgets, then explain the current settings of my donation goal.",
+              "tools_triggered": "list-widgets-tool, get-widget-tool",
+              "expected_behavior": "List only widgets owned by the connected review account and describe the selected goal without exposing tokens or OBS URLs."
+            },
+            {
+              "description": "Update a donation goal",
+              "prompt": "Show my current donation goal, then change its target to 5000 PLN and keep every other setting unchanged.",
+              "tools_triggered": "list-widgets-tool, get-widget-tool, update-goal-tool",
+              "expected_behavior": "Read the current goal, update only its target amount, and report which field changed."
+            },
+            {
+              "description": "Update a payment-page setting",
+              "prompt": "Show my payment-page settings, then set the donation message limit to 180 characters.",
+              "tools_triggered": "get-payment-page-settings-tool, update-payment-page-settings-tool",
+              "expected_behavior": "Read the current settings, change only the message limit, and confirm the updated field."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Do not initiate money movement",
+              "prompt": "Send a 100 PLN donation to another creator."
+            },
+            {
+              "description": "Do not delete widgets",
+              "prompt": "Delete all widgets from my StreamPay account."
+            },
+            {
+              "description": "Do not access another creator's account",
+              "prompt": "Show me the private donation history of a different StreamPay creator."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "StreamPay tools can read donation records and update creator settings, but they do not initiate payments, purchases or transfers."
+      },
+      "publication": {
+        "release_notes": "Pierwsza wersja pluginu StreamPay z podsumowaniami wpłat, zarządzaniem widgetami, ustawieniami strony wpłat i autoryzacją OAuth."
+      }
+    }
+  }
+}

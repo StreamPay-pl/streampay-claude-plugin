@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "streampay",
-  "version": "1.0.1",
-  "description": "Sprawdzaj wpłaty i bezpiecznie zarządzaj widgetami oraz ustawieniami strony wpłat StreamPay.",
+  "version": "1.0.2",
+  "description": "Sprawdzaj wpłaty, twórz widgety i szablony oraz zarządzaj wyglądem, filtrem treści i stroną wpłat StreamPay.",
   "author": {
     "name": "StreamPay",
     "email": "kontakt@streampay.pl",
@@ -17,13 +17,15 @@
       "interface": {
         "displayName": "StreamPay",
         "shortDescription": "Zarządzaj wpłatami i widgetami",
-        "longDescription": "Połącz konto twórcy StreamPay, aby sprawdzać ostatnie wpłaty, podsumowania i ranking wpłacających. Możesz też odczytywać oraz zmieniać obsługiwane ustawienia widgetów i strony wpłat. StreamPay udostępnia tylko dane i operacje objęte zaakceptowanymi uprawnieniami OAuth. Integracja nie może inicjować płatności, usuwać widgetów, zmieniać prywatnych adresów OBS, przesyłać plików ani edytować własnego kodu.",
+        "longDescription": "Połącz konto twórcy StreamPay, aby sprawdzać wpłaty i statystyki, listować widgety i szablony, tworzyć cele, rankingi, odliczania i szablony komunikatów. Zmieniaj obsługiwane style, animacje, głos TTS, progi kwotowe, filtr wulgaryzmów i ustawienia strony wpłat. Testowy komunikat wysyłaj tylko na wyraźną prośbę, bo może pojawić się i odtworzyć dźwięk na transmisji. Dostęp zależy od zaakceptowanych uprawnień OAuth. Integracja nie inicjuje płatności, nie usuwa widgetów, nie ujawnia prywatnych adresów OBS, nie przesyła plików i nie edytuje własnego kodu.",
         "developerName": "StreamPay",
         "category": "Productivity",
         "capabilities": [
-          "Sprawdzanie wpłat i statystyk",
-          "Odczytywanie ustawień widgetów StreamPay",
-          "Zmiana obsługiwanych ustawień widgetów i strony wpłat"
+          "Sprawdzanie wpłat, statystyk oraz listy widgetów i szablonów",
+          "Tworzenie widgetów i szablonów komunikatów",
+          "Zmiana stylów, animacji, głosu TTS i progów kwotowych",
+          "Zarządzanie filtrem wulgaryzmów, blokowanymi frazami i stroną wpłat",
+          "Wysyłanie testowego komunikatu na wyraźną prośbę użytkownika"
         ],
         "websiteURL": "https://streampay.pl/mcp",
         "supportURL": "https://streampay.pl/kontakt",
@@ -31,8 +33,8 @@
         "termsOfServiceURL": "https://streampay.pl/regulamin-platnosci",
         "defaultPrompt": [
           "Pokaż moje ostatnie wpłaty StreamPay i podsumuj dzisiejszą kwotę.",
-          "Wyświetl moje widgety StreamPay i wyjaśnij ich obecne ustawienia.",
-          "Pokaż obecną wartość celu, a następnie ustaw cel zbiórki na 5 000 PLN."
+          "Wyświetl moje widgety i wszystkie szablony komunikatów StreamPay.",
+          "Stwórz drugi cel StreamPay na 5 000 PLN, nie zmieniając istniejącego celu."
         ],
         "brandColor": "#6D28D9",
         "brandColorDark": "#A78BFA",
@@ -50,28 +52,28 @@
               "expected_behavior": "Return up to five paid donations from the connected review account and calculate the total from those results."
             },
             {
-              "description": "Read aggregate donation statistics",
-              "prompt": "How many paid donations have I received, and what is their total and average value?",
-              "tools_triggered": "get-donation-stats-tool",
-              "expected_behavior": "Return the donation count, total, average and other available aggregate values for the connected review account."
-            },
-            {
               "description": "Inspect available widgets",
-              "prompt": "List my widgets, then explain the current settings of my donation goal.",
+              "prompt": "List all my widgets, then show all templates and amount thresholds of my donation alert, including unassigned templates.",
               "tools_triggered": "list-widgets-tool, get-widget-tool",
-              "expected_behavior": "List only widgets owned by the connected review account and describe the selected goal without exposing tokens or OBS URLs."
+              "expected_behavior": "List only owned widgets and return all alert templates and thresholds without security tokens or OBS URLs. Twitch and Kick event widgets expose only identity, type and version."
             },
             {
-              "description": "Update a donation goal",
-              "prompt": "Show my current donation goal, then change its target to 5000 PLN and keep every other setting unchanged.",
-              "tools_triggered": "list-widgets-tool, get-widget-tool, update-goal-tool",
-              "expected_behavior": "Read the current goal, update only its target amount, and report which field changed."
+              "description": "Create a second goal",
+              "prompt": "Create a second donation goal named Review Goal Extra with a target of 5000 PLN. Keep my existing goal unchanged.",
+              "tools_triggered": "list-widgets-tool, create_widget, get-widget-tool",
+              "expected_behavior": "Create a distinct owned goal with target_amount 5000 and verify it. Do not rename or overwrite the original."
             },
             {
-              "description": "Update a payment-page setting",
-              "prompt": "Show my payment-page settings, then set the donation message limit to 180 characters.",
-              "tools_triggered": "get-payment-page-settings-tool, update-payment-page-settings-tool",
-              "expected_behavior": "Read the current settings, change only the message limit, and confirm the updated field."
+              "description": "Create and assign an alert template",
+              "prompt": "In my version 2 donation alert, create a template named Review Alert Extra. Set its nickname to white Arial and amount to gold Arial. Assign it to exactly 100 PLN, preserving all other thresholds. Do not send a test alert.",
+              "tools_triggered": "list-widgets-tool, get-widget-tool, create_new_message_template, update-new-message-tool, update_new_message_thresholds",
+              "expected_behavior": "Create a separate template on the owned version 2 alert and style it. Read thresholds before replacing the complete list, preserve existing IDs and unrelated rules, and retain an enabled non-random fallback. Do not send a live test."
+            },
+            {
+              "description": "Manage an owned blocked phrase",
+              "prompt": "Show my profanity filter, add the phrase streampay-review-phrase to my own blocklist, verify it, then remove only that phrase.",
+              "tools_triggered": "get-profanity-filter-tool, add-blocked-phrase-tool, remove-blocked-phrase-tool",
+              "expected_behavior": "Read the filter and owned phrases, add the requested phrase, obtain its ID and remove it. Preserve all filter flags, unrelated phrases and the global blocklist."
             }
           ],
           "negative": [
@@ -91,10 +93,10 @@
         },
         "demo_recording_url": "https://www.youtube.com/watch?v=W0IE-iur3fA",
         "commerce": false,
-        "commerce_description": "StreamPay tools can read donation records and update creator settings, but they do not initiate payments, purchases or transfers."
+        "commerce_description": "StreamPay tools read donation records, create widgets and templates, update creator settings and queue explicitly requested test alerts. They do not initiate payments, purchases or transfers."
       },
       "publication": {
-        "release_notes": "Pierwsza wersja pluginu StreamPay z podsumowaniami wpłat, zarządzaniem widgetami, ustawieniami strony wpłat i autoryzacją OAuth."
+        "release_notes": "Wersja 1.0.2 opisuje 19 narzędzi MCP: tworzenie widgetów i szablonów, style tekstów, animacje i wybór TTS, progi kwotowe, wygląd odliczania, filtr wulgaryzmów oraz testowy komunikat. Instrukcje wymagają wyraźnej prośby przed testem widocznym na transmisji i zachowania istniejących progów przy ich zmianie."
       }
     }
   }

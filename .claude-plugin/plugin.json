@@ -1,8 +1,8 @@
 {
   "name": "streampay",
   "displayName": "StreamPay",
-  "version": "1.0.2",
-  "description": "Sprawdzaj wpłaty, twórz widgety i szablony oraz zarządzaj wyglądem, filtrem treści i stroną wpłat StreamPay.",
+  "version": "1.0.3",
+  "description": "Sprawdzaj wpłaty, twórz widgety i szablony, konfiguruj subskrypcje Kick v2 i dźwięki galerii oraz zarządzaj wyglądem, filtrem treści i stroną wpłat StreamPay.",
   "author": {
     "name": "StreamPay",
     "email": "kontakt@streampay.pl",

@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "streampay",
-  "version": "1.0.2",
-  "description": "Sprawdzaj wpłaty, twórz widgety i szablony oraz zarządzaj wyglądem, filtrem treści i stroną wpłat StreamPay.",
+  "version": "1.0.3",
+  "description": "Sprawdzaj wpłaty, twórz widgety i szablony, konfiguruj subskrypcje Kick v2 i dźwięki galerii oraz zarządzaj wyglądem, filtrem treści i stroną wpłat StreamPay.",
   "author": {
     "name": "StreamPay",
     "email": "kontakt@streampay.pl",
@@ -17,12 +17,12 @@
       "interface": {
         "displayName": "StreamPay",
         "shortDescription": "Zarządzaj wpłatami i widgetami",
-        "longDescription": "Połącz konto twórcy StreamPay, aby sprawdzać wpłaty i statystyki, listować widgety i szablony, tworzyć cele, rankingi, odliczania i szablony komunikatów. Zmieniaj obsługiwane style, animacje, głos TTS, progi kwotowe, filtr wulgaryzmów i ustawienia strony wpłat. Testowy komunikat wysyłaj tylko na wyraźną prośbę, bo może pojawić się i odtworzyć dźwięk na transmisji. Dostęp zależy od zaakceptowanych uprawnień OAuth. Integracja nie inicjuje płatności, nie usuwa widgetów, nie ujawnia prywatnych adresów OBS, nie przesyła plików i nie edytuje własnego kodu.",
+        "longDescription": "Połącz konto twórcy StreamPay, aby sprawdzać wpłaty i statystyki, listować widgety i szablony, tworzyć cele, rankingi, odliczania i szablony komunikatów. Konfiguruj też subskrypcje Kick v2, progi miesięcy i dźwięki własnej galerii; pozostałe zdarzenia Twitch/Kick są tylko do odczytu. Konfiguracja nie generuje subskrypcji ani TTS i nie udostępnia testu Kick na żywo. Zmieniaj obsługiwane style, animacje, głos TTS, progi kwotowe, filtr wulgaryzmów i ustawienia strony wpłat. Testowy komunikat wysyłaj tylko na wyraźną prośbę, bo może pojawić się i odtworzyć dźwięk na transmisji. Dostęp zależy od zaakceptowanych uprawnień OAuth. Integracja nie inicjuje płatności, nie usuwa widgetów, nie ujawnia prywatnych adresów OBS, nie przesyła plików i nie edytuje własnego kodu.",
         "developerName": "StreamPay",
         "category": "Productivity",
         "capabilities": [
           "Sprawdzanie wpłat, statystyk oraz listy widgetów i szablonów",
-          "Tworzenie widgetów i szablonów komunikatów",
+          "Tworzenie widgetów i szablonów alertów wpłat oraz subskrypcji Kick v2",
           "Zmiana stylów, animacji, głosu TTS i progów kwotowych",
           "Zarządzanie filtrem wulgaryzmów, blokowanymi frazami i stroną wpłat",
           "Wysyłanie testowego komunikatu na wyraźną prośbę użytkownika"
@@ -53,9 +53,9 @@
             },
             {
               "description": "Inspect available widgets",
-              "prompt": "List all my widgets, then show all templates and amount thresholds of my donation alert, including unassigned templates.",
-              "tools_triggered": "list-widgets-tool, get-widget-tool",
-              "expected_behavior": "List only owned widgets and return all alert templates and thresholds without security tokens or OBS URLs. Twitch and Kick event widgets expose only identity, type and version."
+              "prompt": "List my widgets and all donation-alert templates and thresholds. Inspect my Kick subscription v2 widget (create it only if absent), add Review Kick Extra without assigning template thresholds, then set its nickname red and months yellow, both bold, TTS Patryk, BACK_IN_DOWN / BOUNCE / BACK_OUT_RIGHT. Use my gallery Fanfary-Sukcesu.mp3 from month 3, preserving unrelated sound rules and IDs. Do not send any test.",
+              "tools_triggered": "list-widgets-tool, get-widget-tool, create_widget, create_kick_subscription_template, list_sounds, update_kick_subscription",
+              "expected_behavior": "Return owned templates, including unassigned ones, without credentials or OBS URLs. Kick subscriptions v2 are editable; other Twitch/Kick events expose only identity, type and version. Create the singleton only if absent, with initial template and fallback 0. Add a named template without thresholds. Read settings and paginate owned usable sounds (ID/name/file_name, no URLs); ask if ambiguous. Update only requested styles and schema enum animations, Patryk 0. Replace the complete separate widget sound list with months_from 3 plus unrelated rules and IDs; leave template thresholds and fallback 0 unchanged. Month rules use numeric values up to two decimals and highest months_from <= count, never exact/random. Verify settings; configuration creates no subscription, payment or TTS event and no Kick live test exists."
             },
             {
               "description": "Create a second goal",
@@ -96,7 +96,7 @@
         "commerce_description": "StreamPay tools read donation records, create widgets and templates, update creator settings and queue explicitly requested test alerts. They do not initiate payments, purchases or transfers."
       },
       "publication": {
-        "release_notes": "Wersja 1.0.2 opisuje 19 narzędzi MCP: tworzenie widgetów i szablonów, style tekstów, animacje i wybór TTS, progi kwotowe, wygląd odliczania, filtr wulgaryzmów oraz testowy komunikat. Instrukcje wymagają wyraźnej prośby przed testem widocznym na transmisji i zachowania istniejących progów przy ich zmianie."
+        "release_notes": "Wersja 1.0.3 opisuje 22 narzędzia MCP. Nowe: create_kick_subscription_template, update_kick_subscription i list_sounds. Tworzenie widgetu obejmuje subskrypcje Kick v2, style, animacje, TTS oraz oddzielne progi miesięcy szablonów i dźwięków galerii. Każda zmieniana lista zastępuje cały zestaw; zachowaj pozostałe reguły, ID i bazowy szablon od 0 miesięcy. Konfiguracja nie generuje subskrypcji, płatności ani TTS. Test Kick nie jest dostępny; pozostałe zdarzenia Twitch/Kick są tylko do odczytu."
       }
     }
   }

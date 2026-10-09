@@ -96,7 +96,7 @@
         "commerce_description": "StreamPay tools read donation records, create widgets and templates, update creator settings and queue explicitly requested test alerts. They do not initiate payments, purchases or transfers."
       },
       "publication": {
-        "release_notes": "Wersja 1.0.3 opisuje 22 narzędzia MCP. Nowe: create_kick_subscription_template, update_kick_subscription i list_sounds. Tworzenie widgetu obejmuje subskrypcje Kick v2, style, animacje, TTS oraz oddzielne progi miesięcy szablonów i dźwięków galerii. Każda zmieniana lista zastępuje cały zestaw; zachowaj pozostałe reguły, ID i bazowy szablon od 0 miesięcy. Konfiguracja nie generuje subskrypcji, płatności ani TTS. Test Kick nie jest dostępny; pozostałe zdarzenia Twitch/Kick są tylko do odczytu."
+        "release_notes": "Wersja 1.0.4 opisuje 22 narzędzia MCP i dodaje niezależne podkreślenie tekstów przez boolean text_styles.<część>.underline: true włącza, false wyłącza, pominięcie zachowuje stan. Wymaga wdrożenia migracji i frontendu widgetów. Zachowuje create_kick_subscription_template, update_kick_subscription i list_sounds z wersji 1.0.3. Tworzenie widgetu obejmuje subskrypcje Kick v2, style, animacje, TTS oraz oddzielne progi miesięcy szablonów i dźwięków galerii. Każda zmieniana lista zastępuje cały zestaw; zachowaj pozostałe reguły, ID i bazowy szablon od 0 miesięcy. Konfiguracja nie generuje subskrypcji, płatności ani TTS. Test Kick nie jest dostępny; pozostałe zdarzenia Twitch/Kick są tylko do odczytu."
       }
     }
   }

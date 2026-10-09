@@ -71,9 +71,9 @@
             },
             {
               "description": "Manage an owned blocked phrase",
-              "prompt": "Show my profanity filter, add the phrase streampay-review-phrase to my own blocklist, verify it, then remove only that phrase.",
+              "prompt": "Show my profanity filter first. If the normalized phrase streampay-review-phrase already exists in my own blocklist, stop without changing it. Otherwise add that phrase, verify it, then remove only the entry created by this test.",
               "tools_triggered": "get-profanity-filter-tool, add-blocked-phrase-tool, remove-blocked-phrase-tool",
-              "expected_behavior": "Read the filter and owned phrases, add the requested phrase, obtain its ID and remove it. Preserve all filter flags, unrelated phrases and the global blocklist."
+              "expected_behavior": "Read the filter and owned phrases first. If the normalized phrase already exists, stop without adding or removing anything. Otherwise add it, obtain its ID, verify it and remove only the newly added entry. Preserve all pre-existing phrases, filter flags and the global blocklist."
             }
           ],
           "negative": [

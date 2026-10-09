@@ -34,6 +34,8 @@ Do nowego celu, rankingu, odliczania lub alertu użyj `create_widget`. Obsługiw
 
 ## Wygląd widgetów
 
+Podkreślenie ustawiaj przez `text_styles.<część>.underline` jako boolean: `true` włącza, `false` wyłącza, pominięcie zachowuje stan. Pole działa dla wszystkich obsługiwanych tekstów alertów v1/v2, subskrypcji Kick v2, rankingów v1/v2, celów i odliczania. Nie używaj `font_style: "underline"` — podkreślenie jest niezależne od kursywy i pogrubienia. Dla pomarańczowego podkreślonego nicku wyślij `{"text_styles":{"nickname":{"color":"#ff8800","underline":true}}}` i odczytaj wynik ponownie. Nie zastępuj podkreślenia kodem własnym ani znakami Unicode.
+
 Alerty zmieniaj przez `update-new-message-tool`. `text_styles` rozdziela `nickname`, `amount` i `message`. Wersja 2 przyjmuje nazwy fontów, np. Arial lub Times New Roman, oraz `x`, `y`, nullable `width`, `visible`, `font_weight`, `font_style`, `font_shadow` i animacje elementów. Wersja 1 ma zamkniętą listę fontów. Animacje szablonu i `tts_model` wybierają animację oraz głos TTS, a null wyłącza TTS. Korzystaj z liczbowych wartości enum opisanych w schemacie narzędzia, nie zgaduj identyfikatorów.
 
 Rankingi zmieniaj przez `update-ranking-tool`. `text_styles` obejmuje `nickname`, `amount`, `number` i `separator`, także widoczność w v2. Edytowalny tekst ma tylko separator, nick i kwota pozostają dynamiczne. `entry_gap` w v2 zmienia odstęp między wpisami, `element_gap` wewnątrz wpisu. Oba pola przyjmują całkowite piksele od 0 do 100, więc 50.00 px wyślij jako 50. Rankingi nie obsługują dowolnych x/y.

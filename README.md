@@ -1,6 +1,6 @@
 # Plugin StreamPay
 
-Plugin łączy obsługiwanych asystentów AI z kontem twórcy StreamPay przez OAuth 2.0. Użytkownik widzi wymagane uprawnienia i sam je akceptuje. Wersja 1.0.3 opisuje 22 narzędzia MCP.
+Plugin łączy obsługiwanych asystentów AI z kontem twórcy StreamPay przez OAuth 2.0. Użytkownik widzi wymagane uprawnienia i sam je akceptuje. Wersja 1.0.4 opisuje 22 narzędzia MCP.
 
 ## Możliwości i ograniczenia
 
@@ -10,6 +10,8 @@ Plugin łączy obsługiwanych asystentów AI z kontem twórcy StreamPay przez OA
 - Style tekstów, odstępy rankingów, pozycje elementów alertów v2, animacje, wybór głosu TTS, progi kwotowe i wygląd odliczania.
 - Filtr wulgaryzmów, własna lista blokowanych fraz i ustawienia strony wpłat.
 - Testowy komunikat wyłącznie na wyraźną prośbę. Może pojawić się i odtworzyć istniejący dźwięk na transmisji. Nie tworzy wpłaty, postępu celu ani audio TTS. Potwierdzenie kolejki nie oznacza wyświetlenia.
+
+Podkreślenie tekstu ustaw przez `text_styles.<część>.underline`: `true` włącza, `false` wyłącza, pominięcie pozostawia ustawienie bez zmian. Działa niezależnie od koloru, pogrubienia i kursywy w alertach v1/v2, subskrypcjach Kick v2, rankingach v1/v2, celach i odliczaniu. Przykład: `{"text_styles":{"nickname":{"color":"#ff8800","underline":true}}}`.
 
 Zakres zmian wyglądu zależy od typu i wersji widgetu. Cele i alerty v1 mają zamkniętą listę fontów, cele i rankingi nie obsługują dowolnych współrzędnych x/y. Zmiana progów zastępuje całą listę, dlatego asystent musi wcześniej odczytać i zachować pozostałe reguły oraz ich identyfikatory. MCP nie usuwa widgetów, nie przesyła plików, nie edytuje własnego kodu ani nie steruje uruchomionym odliczaniem. Nie inicjuje płatności ani wypłat.
 
@@ -52,6 +54,6 @@ Edytowalne źródło pakietu znajduje się w `plugins/streampay/` głównego rep
 
 ## Informacja dla recenzentów
 
-Przed zgłoszeniem wersji 1.0.3 wdroż backend obsługujący nowe narzędzia i potwierdź 22 narzędzia oraz ich schematy przez autoryzowane `tools/list`. Wgranie pakietu nie wdraża backendu.
+Przed zgłoszeniem wersji 1.0.4 wdroż backend z migracją podkreślenia i zbuduj frontend widgetów. Potwierdź 22 narzędzia oraz boolean `underline` w schematach stylów przez autoryzowane `tools/list`. Wgranie pakietu nie wdraża backendu.
 
 Reviewer credentials are intentionally excluded from this public package. StreamPay provides the dedicated review account and sign-in instructions only through the secure Anthropic or OpenAI submission form. The retained demo recording shows the earlier feature set; new tools are covered by the updated review scenarios.

@@ -1,7 +1,7 @@
 {
   "name": "streampay",
   "displayName": "StreamPay",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Sprawdzaj wpłaty, twórz widgety i szablony, konfiguruj subskrypcje Kick v2 i dźwięki galerii oraz zarządzaj wyglądem, filtrem treści i stroną wpłat StreamPay.",
   "author": {
     "name": "StreamPay",

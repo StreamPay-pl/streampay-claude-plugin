@@ -15,6 +15,8 @@ Podkreślenie tekstu ustaw przez `text_styles.<część>.underline`: `true` wł�
 
 Ranking największych wpłat v2 przyjmuje w `update-ranking-tool` opcje `equal_column_widths` (wspólne szerokości kolumn) oraz `initial_donations` (kwoty początkowe rankingu, np. `[{"nickname":"KrólDonejtów","amount":500}]`). Lista kwot początkowych zastępuje cały zestaw, pusta lista usuwa wszystkie pozycje.
 
+Obrys tekstu ustawiaj przez `text_styles.<część>.border` i `border_color`, a w widgetach v2 także grubość `border_width` (1–10 px). Obrys v2 łączy się z `font_shadow`, np. biała kwota z obrysem i neonową poświatą. W widgetach v2 `uppercase: true` wyświetla tekst wielkimi literami, także dynamiczne nicki. `date_to` kończy okres wpłat w obu rankingach.
+
 Błędy i propozycje funkcji asystent może zgłosić zespołowi StreamPay przez `send_feedback`.
 
 Zakres zmian wyglądu zależy od typu i wersji widgetu. Cele i alerty v1 mają zamkniętą listę fontów, cele i rankingi nie obsługują dowolnych współrzędnych x/y. Zmiana progów zastępuje całą listę, dlatego asystent musi wcześniej odczytać i zachować pozostałe reguły oraz ich identyfikatory. MCP nie usuwa widgetów, nie przesyła plików, nie edytuje własnego kodu ani nie steruje uruchomionym odliczaniem. Nie inicjuje płatności ani wypłat.

@@ -1,6 +1,6 @@
 # Plugin StreamPay
 
-Plugin łączy obsługiwanych asystentów AI z kontem twórcy StreamPay przez OAuth 2.0. Użytkownik widzi wymagane uprawnienia i sam je akceptuje. Wersja 1.0.5 opisuje 23 narzędzia MCP.
+Plugin łączy obsługiwanych asystentów AI z kontem twórcy StreamPay przez OAuth 2.0. Użytkownik widzi wymagane uprawnienia i sam je akceptuje. Wersja 1.0.6 opisuje 23 narzędzia MCP.
 
 ## Możliwości i ograniczenia
 
@@ -14,6 +14,8 @@ Plugin łączy obsługiwanych asystentów AI z kontem twórcy StreamPay przez OA
 Podkreślenie tekstu ustaw przez `text_styles.<część>.underline`: `true` włącza, `false` wyłącza, pominięcie pozostawia ustawienie bez zmian. Działa niezależnie od koloru, pogrubienia i kursywy w alertach v1/v2, subskrypcjach Kick v2, rankingach v1/v2, celach i odliczaniu. Przykład: `{"text_styles":{"nickname":{"color":"#ff8800","underline":true}}}`.
 
 Ranking największych wpłat v2 przyjmuje w `update-ranking-tool` opcje `equal_column_widths` (wspólne szerokości kolumn) oraz `initial_donations` (kwoty początkowe rankingu, np. `[{"nickname":"KrólDonejtów","amount":500}]`). Lista kwot początkowych zastępuje cały zestaw, pusta lista usuwa wszystkie pozycje.
+
+Obrys tekstu ustawiaj przez `text_styles.<część>.border` i `border_color`, a w widgetach v2 także grubość `border_width` (1–10 px). Obrys v2 łączy się z `font_shadow`, np. biała kwota z obrysem i neonową poświatą. W widgetach v2 `uppercase: true` wyświetla tekst wielkimi literami, także dynamiczne nicki. `date_to` kończy okres wpłat w obu rankingach.
 
 Błędy i propozycje funkcji asystent może zgłosić zespołowi StreamPay przez `send_feedback`.
 
@@ -58,6 +60,6 @@ Edytowalne źródło pakietu znajduje się w `plugins/streampay/` głównego rep
 
 ## Informacja dla recenzentów
 
-Przed zgłoszeniem wersji 1.0.5 wdroż backend z narzędziem `send_feedback` i nowymi polami rankingu. Potwierdź 23 narzędzia oraz pola `equal_column_widths` i `initial_donations` w schemacie `update-ranking-tool` przez autoryzowane `tools/list`. Wgranie pakietu nie wdraża backendu.
+Przed zgłoszeniem wersji 1.0.6 wdroż backend z migracjami obrysu i wielkich liter oraz zbuduj frontend widgetów. Potwierdź 23 narzędzia oraz pola `border`, `border_color`, `border_width` i `uppercase` w schematach `text_styles` przez autoryzowane `tools/list`. Wgranie pakietu nie wdraża backendu.
 
 Reviewer credentials are intentionally excluded from this public package. StreamPay provides the dedicated review account and sign-in instructions only through the secure Anthropic or OpenAI submission form. The retained demo recording shows the earlier feature set; new tools are covered by the updated review scenarios.

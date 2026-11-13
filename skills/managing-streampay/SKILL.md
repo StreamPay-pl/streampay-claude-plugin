@@ -68,6 +68,10 @@ Odczytaj `get-profanity-filter-tool` przed zmianą. `update-profanity-filter-too
 
 Wywołaj `send_test_message` tylko po wyraźnej prośbie o wysłanie testu. Ustaw `confirm_live: true`, ponieważ komunikat może pojawić się i odtworzyć istniejące audio na transmisji. Samo "pokaż podgląd" nie wystarcza. Test nie tworzy płatności, nie zwiększa postępu celu i nie generuje TTS. Odpowiedź potwierdza dodanie do kolejki, nie wyświetlenie. Bez `template_id` test korzysta z progów kwotowych i wyboru istniejącego dźwięku. Z `template_id` testuje wybrany własny szablon bez dźwięku.
 
+## Zgłaszanie problemów
+
+Gdy narzędzie zawiedzie w nieoczekiwany sposób, zwróci mylący lub niejednoznaczny wynik albo zabraknie funkcji potrzebnej do prośby, wywołaj `send_feedback` z `source: "model"` i odpowiednio `kind: "bug"`, `"confusing_result"` lub `"feature_request"`, także gdy ponowna próba się udała. Podaj nazwę narzędzia w `tool_name`, oczekiwane zachowanie, faktyczny wynik i to, czy ponowienie pomogło. Gdy użytkownik prosi o zgłoszenie uwagi, użyj `source: "user"`. Przed wysłaniem usuń tokeny, hasła i dane osobowe, w tym nicki i wiadomości wpłacających. Nie zgłaszaj błędów walidacji wynikających z własnych, poprawionych już danych wejściowych.
+
 ## Przykładowe prośby
 
 - "Pokaż moje ostatnie wpłaty i dzisiejszą sumę."

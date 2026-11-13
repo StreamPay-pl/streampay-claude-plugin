@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "streampay",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Sprawdzaj wpłaty, twórz widgety i szablony, konfiguruj subskrypcje Kick v2 i dźwięki galerii oraz zarządzaj wyglądem, filtrem treści i stroną wpłat StreamPay.",
   "author": {
     "name": "StreamPay",
@@ -96,7 +96,7 @@
         "commerce_description": "StreamPay tools read donation records, create widgets and templates, update creator settings and queue explicitly requested test alerts. They do not initiate payments, purchases or transfers."
       },
       "publication": {
-        "release_notes": "Wersja 1.0.5 opisuje 23 narzędzia MCP. Dodaje send_feedback do zgłaszania błędów i propozycji funkcji przez asystenta oraz, w update-ranking-tool dla rankingu największych wpłat v2, opcje equal_column_widths (wspólne szerokości kolumn) i initial_donations (kwoty początkowe rankingu, do 50 pozycji; lista zastępuje cały zestaw, pusta usuwa wszystkie). text_styles przyjmuje obrys (border, border_color, w v2 także border_width) i w v2 wielkie litery (uppercase); obrys v2 łączy się z font_shadow. date_to działa też w rankingu ostatnich wpłat. Zachowuje podkreślenie tekstów z 1.0.4 oraz subskrypcje Kick v2 i list_sounds z 1.0.3. Każda zmieniana lista zastępuje cały zestaw; zachowaj pozostałe pozycje, reguły i ID. Konfiguracja nie generuje wpłat, subskrypcji, płatności ani TTS. Test Kick nie jest dostępny; pozostałe zdarzenia Twitch/Kick są tylko do odczytu."
+        "release_notes": "Wersja 1.0.6 opisuje 23 narzędzia MCP. text_styles przyjmuje obrys tekstu (border, border_color, w widgetach v2 także border_width 1–10 px) oraz w v2 wielkie litery (uppercase, także dla dynamicznych nicków); obrys v2 łączy się z font_shadow, więc tekst może mieć jednocześnie obrys i poświatę. date_to kończy okres wpłat także w rankingu ostatnich wpłat. Wymaga wdrożenia migracji i frontendu widgetów. Zachowuje send_feedback, equal_column_widths i initial_donations z 1.0.5, podkreślenie tekstów z 1.0.4 oraz subskrypcje Kick v2 i list_sounds z 1.0.3. Każda zmieniana lista zastępuje cały zestaw; zachowaj pozostałe pozycje, reguły i ID. Konfiguracja nie generuje wpłat, subskrypcji, płatności ani TTS. Test Kick nie jest dostępny; pozostałe zdarzenia Twitch/Kick są tylko do odczytu."
       }
     }
   }
